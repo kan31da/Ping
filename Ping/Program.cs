@@ -36,18 +36,18 @@ while (true)
     while (sqlite_datareader.Read())
     {
 
-        string ip = sqlite_datareader.GetString(1);
+        string ip = sqlite_datareader.GetString(2);
 
         if (await PingAsync(ip))
         {
-            Console.WriteLine("YES");
+            Console.WriteLine(true);
         }
         else
         {
-            Console.WriteLine("NO");
+            Console.WriteLine(false);
         }
 
-        Console.WriteLine(sqlite_datareader.GetString(0) + " " + sqlite_datareader.GetString(1));
+        Console.WriteLine(sqlite_datareader.GetString(1) + " " + sqlite_datareader.GetString(2));
         Console.WriteLine(Environment.NewLine);
     }
 
@@ -111,7 +111,7 @@ static bool CheckData(SQLiteConnection conn)
 
 static void CreateTable(SQLiteConnection conn)
 {
-    string Createsql = "CREATE TABLE PingTable (NAME VARCHAR(20), IpAddress VARCHAR(20)); ";
+    string Createsql = "CREATE TABLE PingTable (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20), IpAddress VARCHAR(20)); ";
     SQLiteCommand sqlite_cmd = conn.CreateCommand();
 
     sqlite_cmd.CommandText = Createsql;
