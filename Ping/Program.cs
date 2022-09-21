@@ -8,6 +8,7 @@ if (sqlite_conn != null)
     if (CheckData(sqlite_conn))
     {
         CreateTable(sqlite_conn);
+        InsertData(sqlite_conn, "VLADI_HOME", "46.35.184.210");
     }
 }
 
@@ -23,10 +24,12 @@ if (sqlite_conn != null)
 //    line = Console.ReadLine();
 //}
 
+
 SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 sqlite_cmd.CommandText = "SELECT * FROM PingTable";
 
 SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader();
+
 
 while (true)
 {
@@ -85,7 +88,6 @@ static SQLiteConnection CreateConnection()
     catch (Exception)
     {
         return null;
-
     }
 
     return sqlite_conn;
